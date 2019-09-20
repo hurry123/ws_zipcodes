@@ -20,13 +20,9 @@ public class ZipCodes {
 	 * @param endZip
 	 *            would be lower bound of the Zipcode Range
 	 */
-	public ZipCodes(int startZip, int endZip) {
+	public ZipCodes(int startZip, int endZip) throws ZipcodeException {
 
-		try {
-			validate(startZip, endZip);
-		} catch (ZipcodeException e) {
-			e.printStackTrace();
-		}
+		validate(startZip, endZip);
 
 		if (startZip <= endZip) {
 			this.startZip = startZip;

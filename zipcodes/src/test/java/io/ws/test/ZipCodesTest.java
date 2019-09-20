@@ -11,26 +11,21 @@ import static org.hamcrest.Matchers.not;
 
 public class ZipCodesTest {
 
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
+	
+	  @Rule public ExpectedException thrown = ExpectedException.none();
+	 
+	  @Test(expected = ZipcodeException.class) 
+	  public void testValidateRange()  throws ZipcodeException {
 
-	/*
-	 * @Test(expected = ZipcodeException.class) public void testValidateRange()
-	 * throws ZipcodeException {
-	 * 
-	 * new ZipCodes(90, 12354); // not a 5-digit code new ZipCodes(654321, 123456);
-	 * // not a 5-digit code new ZipCodes(90564, 12354); // startZip > endZip
-	 * 
-	 * thrown.
-	 * expectMessage("Validation Failed :: [90564, 12354] is not in valid Zipcode Range!"
-	 * ); thrown.
-	 * expectMessage("Validation Failed :: 90 is not in valid 5-digit Zipcode Range!"
-	 * ); thrown.
-	 * expectMessage("Validation Failed :: 654321 is not in valid 5-digit Zipcode Range!"
-	 * );
-	 * 
-	 * }
-	 */
+		  new ZipCodes(90, 12354); // not a 5-digit code 
+		  new ZipCodes(654321, 123456);// not a 5-digit code 
+		  new ZipCodes(90564, 12354); // startZip > endZip
+
+		  thrown.expectMessage("Validation Failed :: [90564, 12354] is not in valid Zipcode Range!"); 
+		  thrown.expectMessage("Validation Failed :: 90 is not in valid 5-digit Zipcode Range!");
+		  thrown.expectMessage("Validation Failed :: 654321 is not in valid 5-digit Zipcode Range!");
+
+	  }
 
 	@Test
 	public void testConstructorBounds() throws ZipcodeException {
@@ -40,17 +35,17 @@ public class ZipCodesTest {
 		assertThat(range.getEndZip(), is(equalTo(95747)));
 	}
 
-	/*
-	 * @Test public void testSetBounds() throws ZipcodeException {
-	 * thrown.expect(ZipcodeException.class);
-	 * 
-	 * ZipCodes range = new ZipCodes(0, 123456);
-	 * thrown.expect(ZipcodeException.class);
-	 * 
-	 * thrown.
-	 * expectMessage("Validation Failed :: 0 is not in valid 5-digit Zipcode Range!"
-	 * ); range.setStartZip(45); range.setEndZip(145632); }
-	 */
+	
+	@Test 
+	public void testSetBounds() throws ZipcodeException {
+		
+		thrown.expect(ZipcodeException.class);
+		ZipCodes range = new ZipCodes(0, 123456);
+		thrown.expectMessage("Validation Failed :: 0 is not in valid 5-digit Zipcode Range!");
+		range.setStartZip(45); 
+		range.setEndZip(145632);
+	}
+	 
 
 	@Test
 	public void testEquals() throws ZipcodeException {
